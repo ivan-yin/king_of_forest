@@ -1,4 +1,4 @@
-package com.ifzer.utils;
+package com.ifzer.utils.excel;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -14,10 +14,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
-import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +33,7 @@ public class ExcelExportUtil {
         exportExcelNoModuleHandler(data, clazz, true, null, true)
                 .write(response.getOutputStream());
     }
+
     private static Workbook exportExcelNoModuleHandler(List<?> data, Class clazz, boolean isWriteHeader,
                                                 String sheetName, boolean isXSSF) throws Exception {
 
@@ -84,7 +83,7 @@ public class ExcelExportUtil {
      * @throws IllegalAccessException    异常
      * @throws IntrospectionException    异常
      */
-    public static String getProperty(Object bean, String fieldName, WriteConvertible writeConvertible)
+    private static String getProperty(Object bean, String fieldName, WriteConvertible writeConvertible)
             throws InvocationTargetException, IllegalAccessException, IntrospectionException {
 
         if (bean == null || fieldName == null){
@@ -92,9 +91,7 @@ public class ExcelExportUtil {
         }
         final Field field = ReflectUtil.getField(bean.getClass(), fieldName);
         final Class<?> type = field.getType();
-        Method method = ReflectUtil.getMethod(bean.getClass(), fieldName);
-//        Method method = getterOrSetter(bean.getClass(), fieldName, Utils.FieldAccessType.GETTER);
-        Object object = method.invoke(bean);
+        Object object = ReflectUtil.getFieldValue(bean, fieldName);
         if (type == Date.class || type == Timestamp.class){
             return new ExcelWriteConv.DateConv().execWrite(object).toString();
         }

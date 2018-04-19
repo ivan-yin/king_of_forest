@@ -1,4 +1,4 @@
-package com.ifzer.utils;
+package com.ifzer.utils.excel;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.format.FastDateFormat;
@@ -18,7 +18,7 @@ public class ExcelWriteConv {
             if (Objects.isNull(object)){
                 return "";
             }
-            return FastDateFormat.getInstance().format(object);
+            return DateUtil.formatDateTime((Date) object);
         }
     }
 }

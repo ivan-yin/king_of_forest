@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @SpringBootApplication
-
 public class Application {
     
     private final static Logger LOGGER = LoggerFactory.getLogger(Application.class);

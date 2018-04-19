@@ -1,18 +1,16 @@
 package com.ifzer.modules.users.controller;
 
 
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.github.crab2died.ExcelUtils;
+import com.ifzer.common.BaseController;
 import com.ifzer.common.RespData;
 import com.ifzer.modules.users.entity.Users;
 import com.ifzer.modules.users.service.IUsersService;
-import com.ifzer.utils.ExcelExportUtil;
+import com.ifzer.utils.excel.ExcelExportUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -35,7 +32,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/users/")
-public class UsersController {
+public class UsersController extends BaseController{
 
     private final static Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
@@ -67,11 +64,7 @@ public class UsersController {
     @GetMapping("export")
     public void export(HttpServletResponse response){
         final List<Users> users = usersService.selectList(new EntityWrapper<>());
-        try {
-            ExcelExportUtil.exportObjects2Excel(users, Users.class, response);
-        }catch (Exception e){
-            LOGGER.error(e.getMessage(), e);
-        }
+        export(users, Users.class, response);
     }
 
 }
