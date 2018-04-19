@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by nelson on 2018-04-19.
  */
 @Configuration
-//@MapperScan
+@MapperScan("com.ifzer.modules.**.mapper")
 public class MyBatisPlusConfig {
 
     /**

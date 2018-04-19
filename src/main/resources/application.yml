@@ -32,15 +32,20 @@ spring:
       enabled: true
     restart:
       enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 logging:
   file: king_of_forest.log
+  level:
+    com.baomidou.mybatisplus.plugins.PerformanceInterceptor : debug
 
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
-  mapper-locations: classpath:/mybatis_mapper/*Mapper.xml
+  mapper-locations: classpath:/mybatis_mapper/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
 #  typeAliasesPackage: com.ifzer.*.entity
 #typeEnumsPackage: com.baomidou.springboot.entity.enums
@@ -74,7 +79,6 @@ mybatis-plus:
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
 #    interceptors: com.ifzer.config.MyBatisPlusConfig
-
 
 
 
