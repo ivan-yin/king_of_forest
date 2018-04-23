@@ -27,31 +27,31 @@ public class Users implements Serializable {
     /**
      * 用户名
      */
-    @ExcelField(title="用户名")
+    @ExcelField(title="用户名", order = 1)
     private String username;
 
     /**
      * 密码
      */
-    @ExcelField(title="密码")
+    @ExcelField(title="密码", order = 2)
     private String password;
 
     /**
      * 创建日期
      */
-    @ExcelField(title="创建日期")
+    @ExcelField(title="创建日期", order = 11)
     private Date createDate;
 
     /**
      * 更新日期
      */
-    @ExcelField(title="更新日期")
+    @ExcelField(title="更新日期", order = 12)
     private Date updateDate;
 
     /**
      * 是否删除,1=是,0=否
      */
-    @ExcelField(title="是否删除,1=是,0=否")
+    @ExcelField(title="是否删除,1=是,0=否", order = 7)
     private String del;
 
     public String getId() {

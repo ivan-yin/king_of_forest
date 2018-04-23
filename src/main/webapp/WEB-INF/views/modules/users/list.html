@@ -8,16 +8,20 @@
 <body>
     <div>
         <table id="tt" class="easyui-datagrid"
+               striped="true" remoteSort="true"
+               showHeader="true" showFooter="false"
                url="/users/pageJson" method="GET" singleSelect="true"
                title="用户数据列表" iconCls="icon-search"
                rownumbers="true" pagination="true"
                style="width:600px;height:400px">
             <thead>
-            <tr>
-                <th field="username" width="80">用户名</th>
-                <th field="password" width="80">密码</th>
-                <th field="createDate">创建日期</th>
-            </tr>
+                <tr>
+                    <#if headerList??>
+                        <#list headerList as h>
+                            <th field="${h.filed}" sortable="true">${h.title}</th>
+                        </#list>
+                    </#if>
+                </tr>
             </thead>
         </table>
     </div>

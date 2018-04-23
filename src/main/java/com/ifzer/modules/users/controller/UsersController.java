@@ -1,11 +1,7 @@
 package com.ifzer.modules.users.controller;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.ifzer.common.BaseController;
-import com.ifzer.common.JquiPage;
-import com.ifzer.common.RespData;
 import com.ifzer.modules.users.entity.Users;
 import com.ifzer.modules.users.service.IUsersService;
 import org.slf4j.Logger;
@@ -14,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -32,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/users/")
-public class UsersController extends BaseController{
+public class UsersController extends BaseController<Users>{
 
     private final static Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
@@ -41,26 +35,14 @@ public class UsersController extends BaseController{
 
     @GetMapping("list")
     public ModelAndView list(HttpServletResponse response, ModelAndView mv){
-        RespData respData = new RespData();
-        final List<Users> users = usersService.selectList(new EntityWrapper<>());
-        respData.setListData(users);
+//        RespData respData = new RespData();
+//        final List<Users> users = usersService.selectList(new EntityWrapper<>());
+//        respData.setListData(users);
+//        mv.addObject(respData);
+
         mv.setViewName("/modules/users/list");// /modules/users/list or list 都可以，但要把模板放在resources的相对目录下
-        mv.getModel().put("respData", respData);
-        mv.addObject(respData);
+        mv.getModel().put("headerList", getHeaderList(eClz));
         return mv;
-    }
-
-    @GetMapping("pageJson")
-    @ResponseBody
-    public JquiPage pageJson(@RequestParam(defaultValue = "1") int page,
-                             @RequestParam(defaultValue = "10")  int rows){
-        return JquiPage.fromMyBatisPage(usersService.selectPage(new Page<>(page, rows)));
-    }
-
-    @GetMapping("export")
-    public void export(HttpServletResponse response){
-        final List<Users> users = usersService.selectList(new EntityWrapper<>());
-        export(users, Users.class, response);
     }
 
 }
