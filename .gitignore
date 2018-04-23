@@ -15,6 +15,7 @@
 *.war
 *.ear
 *.zip
+*.gz
 *.tar.gz
 *.rar
 
