@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,6 +25,11 @@ public class BaseController {
             ExcelExportUtil.exportObjects2Excel(datalist, clz, response);
         }catch (Exception e){
             LOGGER.error(e.getMessage(), e);
+            try {
+                response.getWriter().write(e.getMessage());
+            } catch (IOException e1) {
+                LOGGER.error(e1.getMessage(), e1);
+            }
         }
     }
 }

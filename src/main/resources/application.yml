@@ -5,6 +5,9 @@ spring:
     banner-mode: console
   freemarker:
     enabled: true
+    suffix: .html
+#    template-loader-path: classpath:/resources, WEB-INF
+    template-loader-path: /WEB-INF/views,
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:

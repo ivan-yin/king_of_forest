@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user list</title>
+    <#include "*/common/header.html"/>
+</head>
+<body>
+    <div>
+        <table id="tt" class="easyui-datagrid"
+               url="/users/pageJson" method="GET" singleSelect="true"
+               title="用户数据列表" iconCls="icon-search"
+               rownumbers="true" pagination="true"
+               style="width:600px;height:400px">
+            <thead>
+            <tr>
+                <th field="username" width="80">用户名</th>
+                <th field="password" width="80">密码</th>
+                <th field="createDate">创建日期</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <!--<div>
+        <#if respData.listData??>
+            <#list respData.listData as rec>
+                "${rec.username}"
+                <br>
+            </#list>
+            current_template_name  ${.currentTemplateName },
+            lang ${.lang},
+            version ${.version},
+            Today is ${.now?date}
+        </#if>
+    </div>-->
+</body>
+<#include "*/common/footer.html"/>
+</html>
