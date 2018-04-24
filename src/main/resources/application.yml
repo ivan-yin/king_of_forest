@@ -38,12 +38,19 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  activiti:
+    check-process-definitions: false
+    jpa-enabled: false
+    process-definition-location-prefix: /WEB-INF/activiti_process
 
 
 logging:
-  file: king_of_forest.log
   level:
     com.baomidou.mybatisplus.plugins.PerformanceInterceptor : debug
+  file:
+    max-history: 1
+    max-size: 10m
+
 
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
